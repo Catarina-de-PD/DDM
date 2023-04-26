@@ -6,6 +6,12 @@ void main() {
   runApp(const MyApp());
 }
 
+var nome;
+void Teste() {
+  nome = "teste";
+  print(nome);
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,23 +19,40 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'AccessCity',
         theme: ThemeData(
-          primarySwatch: Colors.lightBlue,
+          primarySwatch: Colors.blue,
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text("AccessCity"),
+            backgroundColor: Color.fromARGB(255, 8, 103, 136),
+            actions: [
+              //Icon tem que ser um DropdownButton
+              Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 60,
+              ),
+              SizedBox(
+                width: 470,
+              ),
+              Icon(
+                Icons.search,
+                color: Colors.white,
+                size: 60,
+              )
+            ],
           ),
           body: SingleChildScrollView(
             child: Column(children: [
               SizedBox(
-                width: 360,
-                height: 560,
+                width: 600,
+                height: 912,
                 child: FlutterMap(
                   options: MapOptions(
                     center: LatLng(-22.560992, -47.423818),
-                    zoom: 8.0,
+                    zoom: 13.0,
                   ),
                   layers: [
                     TileLayerOptions(
@@ -40,10 +63,25 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                color: const Color.fromARGB(255, 8, 103, 136),
+                height: 75,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 470),
+                    Icon(
+                      Icons.wallet,
+                      color: Colors.white,
+                      size: 60,
+                    ),
+                  ],
+                ),
+              ),
             ]),
           ),
         )
-    );
+        );
   }
 }
 
