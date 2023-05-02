@@ -6,10 +6,16 @@ void main() {
   runApp(const MyApp());
 }
 
-var nome;
-void Teste() {
-  nome = "teste";
-  print(nome);
+void Pesquisa() {
+  print("Pesquisar");
+}
+
+void Menu() {
+  print("Menu");
+}
+
+void Carteira(){
+  print("Carteira");
 }
 
 class MyApp extends StatelessWidget {
@@ -27,28 +33,33 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 8, 103, 136),
+            //Icone menu
+            leading: IconButton(
+              icon: Icon(Icons.menu),
+              color: Colors.white,
+              iconSize: 50,
+              onPressed: () {
+                Menu();
+              },
+            ),
             actions: [
-              //Icon tem que ser um DropdownButton
-              Icon(
-                Icons.menu,
+              //Pesquisa tem que ser um DropdownButton
+              IconButton(
+                icon: Icon(Icons.search),
                 color: Colors.white,
-                size: 60,
-              ),
-              SizedBox(
-                width: 470,
-              ),
-              Icon(
-                Icons.search,
-                color: Colors.white,
-                size: 60,
+                iconSize: 50,
+                onPressed: () {
+                  Pesquisa();
+                },
               )
             ],
           ),
           body: SingleChildScrollView(
             child: Column(children: [
+              //Inicio mapa
               SizedBox(
                 width: 600,
-                height: 912,
+                height: 900,
                 child: FlutterMap(
                   options: MapOptions(
                     center: LatLng(-22.560992, -47.423818),
@@ -63,25 +74,81 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
+              //Fim mapa
+              //Footer
               Container(
                 color: const Color.fromARGB(255, 8, 103, 136),
-                height: 75,
+                height: 88,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 470),
-                    Icon(
-                      Icons.wallet,
-                      color: Colors.white,
-                      size: 60,
-                    ),
-                  ],
-                ),
-              ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: 70,
+                      ),
+                      //Container do Switch
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 8, 103, 136),
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 4,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Padding(padding: EdgeInsets.all(5)),
+                            //Icone onibus
+                            Icon(
+                              Icons.bus_alert,
+                              color: Colors.white,
+                              size: 60,
+                            ),
+                            //Switch
+                            Switch(
+                              activeColor: Colors.white,
+                              value: true,
+                              onChanged: (value) {
+                                print("VALUE : $value");
+                              },
+                            ),
+                            //Localização
+                            Icon(
+                              Icons.location_on,
+                              color: Colors.white,
+                              size: 60,
+                            )
+                          ],
+                        ),
+                      ),
+                      //Icon carteira
+                      Container(
+                        width: 70,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 8, 103, 136),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 4,
+                          ),
+                        ),
+                        child: 
+                        IconButton(
+                          icon: Icon(Icons.wallet),
+                          color: Colors.white,
+                          iconSize: 50,
+                          onPressed: (){
+                            Carteira();
+                          },
+                        ),
+                      ),
+                    ]),
+              )
             ]),
           ),
-        )
-        );
+        ));
   }
 }
 
