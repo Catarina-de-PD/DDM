@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+
 
 void Pesquisa() {
-  print("Pesquisar");
+  print("Pesquisa");
 }
 
 void Menu() {
   print("Menu");
 }
 
-void Carteira(){
+void Carteira() {
   print("Carteira");
 }
 
@@ -33,15 +31,6 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(255, 8, 103, 136),
-            //Icone menu
-            leading: IconButton(
-              icon: Icon(Icons.menu),
-              color: Colors.white,
-              iconSize: 50,
-              onPressed: () {
-                Menu();
-              },
-            ),
             actions: [
               //Pesquisa tem que ser um DropdownButton
               IconButton(
@@ -53,6 +42,39 @@ class MyApp extends StatelessWidget {
                 },
               )
             ],
+          ),
+          //Menu
+          drawer: Drawer(
+            child: ListView(padding: EdgeInsets.zero, children: const <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 8, 103, 136),
+                ),
+                child: Text(
+                  'AccessCity',
+                  style: TextStyle(
+                    color: Color.fromARGB(160, 255, 60, 16), //vermelho errado
+                    fontSize: 35,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Meu Perfil'),
+              ),
+              ListTile(
+                leading: Icon(Icons.wallet),
+                title: Text('Meus documentos'),
+              ),
+              ListTile(
+                leading: Icon(Icons.search),
+                title: Text('Busca'),
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Configurações'),
+              )
+            ]),
           ),
           body: SingleChildScrollView(
             child: Column(children: [
@@ -134,12 +156,11 @@ class MyApp extends StatelessWidget {
                             width: 4,
                           ),
                         ),
-                        child: 
-                        IconButton(
+                        child: IconButton(
                           icon: Icon(Icons.wallet),
                           color: Colors.white,
                           iconSize: 50,
-                          onPressed: (){
+                          onPressed: () {
                             Carteira();
                           },
                         ),
