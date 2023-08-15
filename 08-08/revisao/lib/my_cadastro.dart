@@ -11,7 +11,6 @@ class MyCadastro extends StatefulWidget {
 }
 
 class _MyCadastroState extends State<MyCadastro> {
-
   TextEditingController campoRa = TextEditingController();
   TextEditingController campoNome = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -30,62 +29,63 @@ class _MyCadastroState extends State<MyCadastro> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Form(
-              key: formKey,
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextFormField(
-                    controller: campoRa,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                key: formKey,
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextFormField(
+                      controller: campoRa,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("RA não pode ser vazio");
+                        } else if (int.parse(campoRa.text) < 10) {
+                          return ("RA deve ser maior que 10");
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return("RA não pode ser vazio");
-                      }else if(int.parse(campoRa.text)<10){
-                        return("RA deve ser maior que 10");
-                      }else{
-                        return null;
-                      }
-                    },
-                  ),
-                  SizedBox(height: 10,),
-                  TextFormField(
-                    controller: campoNome,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                    SizedBox(
+                      height: 10,
                     ),
-                    validator: (value){
-                      if(value!.isEmpty){
-                        return("O nome não pode ser vazio");
-                      }else if(campoNome.text.length<5){
-                        return("O nome precisa ter mais que 5 caracteres");
-                      }else{
-                        return null;
-                      }
-                    },
-                  ),
-                ],
-              )
-            ),
+                    TextFormField(
+                      controller: campoNome,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("O nome não pode ser vazio");
+                        } else if (campoNome.text.length < 5) {
+                          return ("O nome precisa ter mais que 5 caracteres");
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ],
+                )),
             ElevatedButton(
-              onPressed: (){
-                if(formKey.currentState!.validate()){
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
                   ra = int.parse(campoRa.text);
                   nome = campoNome.text;
                   mostrarMsgSucesso();
-                  setState(() {
-                    
-                  });
-                  }
-              }, 
+                  setState(() {});
+                }
+              },
               child: Text("Cadastrar"),
             ),
-            Text("Valores digitados: $ra, $nome"),    
+            Text("Valores digitados: $ra, $nome"),
           ],
         ),
       ),
@@ -93,7 +93,7 @@ class _MyCadastroState extends State<MyCadastro> {
   }
 
   //metodo
-  void mostrarMsgSucesso(){
+  void mostrarMsgSucesso() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text("Aluno cadastrado com sucesso")),
     );
