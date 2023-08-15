@@ -1,16 +1,16 @@
 // ignore_for_file: unnecessary_this
 
 class Usuario{
-  String usuario = ""; 
+  String user = ""; 
   String senha = "";
  
   //construtor
-  Usuario(this.usuario, this.senha);
+  Usuario(this.user, this.senha);
 
   //getters e setters
-  String get getUsuario => this.usuario;
+  String get getUser => this.user;
 
-  set setUsuario(String usuario) => this.usuario = usuario;
+  set setUsuario(String usuario) => this.user = usuario;
 
   get getSenha => this.senha;
 

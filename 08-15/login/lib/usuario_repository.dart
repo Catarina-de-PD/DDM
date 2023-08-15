@@ -3,7 +3,11 @@
 import 'usuario.dart';
 
 class UsuarioRepository{
-  List<Usuario> _listaUsuario = [];
+  List<Usuario> _listaUsuario = [
+    Usuario("Catarina", "catarina"),
+    Usuario("João", "joao"),
+    Usuario("Maria", "maria"),
+  ];
 
   //construtor
   UsuarioRepository(){
@@ -16,14 +20,20 @@ class UsuarioRepository{
 
   void imprimir(){
     for(var i=0; i<_listaUsuario.length; i++){
-      print("Usuário: ${_listaUsuario[i].usuario}, Senha: ${_listaUsuario[i].usuario},");
+      print("Usuário: ${_listaUsuario[i].user}, Senha: ${_listaUsuario[i].user},");
     }
   }
 
-  bool login(Usuario us){
+  bool verificaLogin(Usuario us){
+    //variável de us chega certo
     for(var u in _listaUsuario){
-      
+      if(us.getUser == u.getUser && us.getSenha == u.getSenha){
+        print(us.getUser);
+        //Instance of usuario
+        print(us.getSenha);
+        return true;
+      }
     }
-    return false;
+    return true;
   }
 }

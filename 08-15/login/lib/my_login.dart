@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last, avoid_types_as_parameter_names, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:login/usuario.dart';
@@ -15,6 +15,7 @@ class _MyLoginState extends State<MyLogin> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   TextEditingController campoUsuario = TextEditingController();
   TextEditingController campoSenha = TextEditingController();
+  UsuarioRepository repository = UsuarioRepository();
   String usuario = "";
   String senha = "";
   bool verificaLogin = false;
@@ -60,6 +61,13 @@ class _MyLoginState extends State<MyLogin> {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               label: Text("Senha")),
+                          validator: (value){
+                            if(value!.isEmpty){
+                              return("A senha não pode ser vazia");
+                            }else if(value.length<8){
+                              return("A senha deve ter mais de 8 dígitos");
+                            }
+                          },
                         ),
                       ),
                       //Botao
@@ -68,8 +76,46 @@ class _MyLoginState extends State<MyLogin> {
                           if(formkey.currentState!.validate()){
                             usuario = campoUsuario.text;
                             senha = campoSenha.text;
-                            Usuario user = Usuario(usuario, senha);
-                           
+                            Usuario us = Usuario(usuario, senha);
+                            if(repository.verificaLogin(us)){
+                              campoUsuario.clear();
+                              campoSenha.clear();
+                              showDialog(
+                                context: context, 
+                                builder: (BuildContext){
+                                  return AlertDialog(
+                                    title: Text("Login"),
+                                    content: Text("Login bem sucedido $us. $senha "),
+                                    actions: [
+                                      TextButton(
+                                        child: Text("OK"),
+                                        onPressed: (){
+                                          Navigator.pushNamed(context, '/home');
+                                        },
+                                      )
+                                    ]
+                                  );
+                                }
+                              );
+                            }else{
+                              showDialog(
+                                context: context, 
+                                builder: (BuildContext){
+                                  return AlertDialog(
+                                    title: Text("Login"),
+                                    content: Text("Login mal sucedido"),
+                                    actions: [
+                                      TextButton(
+                                        child: Text("OK"),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                      )
+                                    ]
+                                  );
+                                }
+                              );
+                            }
                           }
                         },
                         child: Text("Login"),
