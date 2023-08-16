@@ -9,10 +9,6 @@ class UsuarioRepository{
     Usuario("Maria", "maria"),
   ];
 
-  //construtor
-  UsuarioRepository(){
-    this._listaUsuario = [];
-  }
 
   void adicionar(Usuario us){
     _listaUsuario.add(us);
@@ -27,13 +23,13 @@ class UsuarioRepository{
   bool verificaLogin(Usuario us){
     //variável de us chega certo
     for(var u in _listaUsuario){
-      if(us.getUser == u.getUser && us.getSenha == u.getSenha){
-        print(us.getUser);
+      if(us.user == u.user && us.senha == u.senha){
+        print(us.user);
         //Instance of usuario
-        print(us.getSenha);
+        print(us.senha);
         return true;
       }
     }
-    return true;
+    return false;
   }
 }

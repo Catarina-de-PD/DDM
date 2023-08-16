@@ -56,6 +56,7 @@ class _MyLoginState extends State<MyLogin> {
                       Padding(
                         padding: EdgeInsets.all(10.0),
                         child: TextFormField(
+                          obscureText: false,
                           controller: campoSenha,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -85,7 +86,7 @@ class _MyLoginState extends State<MyLogin> {
                                 builder: (BuildContext){
                                   return AlertDialog(
                                     title: Text("Login"),
-                                    content: Text("Login bem sucedido $us. $senha "),
+                                    content: Text("Login bem sucedido"),
                                     actions: [
                                       TextButton(
                                         child: Text("OK"),
